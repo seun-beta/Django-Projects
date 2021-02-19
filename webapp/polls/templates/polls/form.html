@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% if input %}
+        <h2>This is your input: {{input}}</h2>
+    {% endif %}
+    <form action="" method="POST">
+        <label for="text1">Label:</label><br>
+        <input type="text" name="input" id="text1" size="40">
+        {% csrf_token %}
+        <input type="submit" value="Submit">
+    </form>
+    
+</body>
+</html>
