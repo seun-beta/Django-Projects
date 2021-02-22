@@ -2,13 +2,17 @@ from django.http import HttpResponse, response
 from django.http import HttpResponseRedirect
 from django.utils.html import escape
 from django.views import View
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
 class ClassView(View):
     def get(self, request):
-        return render(request, 'polls/form.html')
+        data = request.session.get('input', False)
+        print(data)
+        #if (data) : del(request.session['input'])
+        return render(request, 'polls/form.html', {'input': data})
     
     def post(self, request):
         response = request.POST.get('input')
-        context = {'input' : response}
-        return render(request, 'polls/form.html', context)
+        request.session['input'] = response 
+        print(request.session['input'])
+        return redirect(request.path)
