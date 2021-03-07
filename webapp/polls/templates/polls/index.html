@@ -6,18 +6,19 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Welcome to the Default HTML Page</h1>
-    <h2>Current request.path {{ request.path }}</h2>
+    <h1>Welcome to the Index HTML Page</h1>
+    <p>Current request.path: {{ request.path }}<p>
+
     {% if user.is_authenticated %}
         <p>Authenticated as</p>
         <h4>
-            Name: {{user.get_full_name}}
-            Email: {{user.email}}
-            Id: {{user.id}}
+            Name: {{user.get_full_name}} <br>
+            Email: {{user.email}} <br>
+            Id: {{user.id}} <br>
         </h4>
-        <p>You can <a href="{% url 'logout' %}?next={% url 'authz:open' %}">Logout</a></p>
+        <p>You can <a href="{% url 'logout' %}?next={% url 'polls:index' %}">Logout</a></p>
     {% else %}
-        <p>You can <a href="{% url 'login' %}?next={% request.path %}">Login</a></p>
+        <p>You can <a href="{% url 'login' %}?next= {{ request.path }}">Login</a></p>
     {% endif %}
 </body>
 </html>
