@@ -3,6 +3,12 @@ from django.urls.base import resolve
 from django.views import View
 from django.shortcuts import redirect, render
 from django.urls import reverse
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+
+class Index(View, LoginRequiredMixin):
+    def get(self, request):
+        return render(request, 'polls/index.html')
 
 
 class ClassView(View):
