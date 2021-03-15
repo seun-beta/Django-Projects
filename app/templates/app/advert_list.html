@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advert List</title>
+</head>
+<body>
+    {% if object_list %}
+        <ul>
+        {% for advert in object_list %}
+            <li><a href="{% url 'app:ad_detail' advert.id %}">{{ advert.title }}</a></li>
+        
+            {% if advert.owner == request.user %}
+                <a href="{% url 'app:ad_update' advert.id %}">Edit</a>
+                <a href="{% url 'app:ad_delete' advert.id  %}">Delete</a>
+            {% else %}
+                <a href="{% url 'login' %}"></a>
+            {% endif %} 
+        {% endfor %}   
+        </ul>
+
+    {% else %}
+        <p>The adverts list is empty</p><br>
+        <a href="{% url 'app:ad_create' %}">Create Advert</a>
+    {% endif %}
+
+    {% if user.is_authenticated %}
+        <a href="{% url 'app:ad_create' %}">Create Advert</a> <br>
+        <a href="{% url 'logout' %}?next={% url 'app:all' %}">Logout</a>
+    {% else %}
+        <a href="{% url 'login' %}">Login</a>
+
+    {% endif %}
+</body>
+</html>
