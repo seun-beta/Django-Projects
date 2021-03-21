@@ -7,7 +7,7 @@
     <title>Advert List</title>
 </head>
 <body>
-    {% if object_list %}
+    {% if object_list %} 
         <ul>
         {% for advert in object_list %}
             <li><a href="{% url 'app:ad_detail' advert.id %}">{{ advert.title }}</a></li>
